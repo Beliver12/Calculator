@@ -1,0 +1,15 @@
+#container{
+  border: 1px solid black;
+   height: 294px;
+   width: 254px;
+  
+ }
+ #display{
+   border-bottom: 1px solid black;
+   height: 50px 
+ }
+button{
+height: 60px;
+width: 60px;
+
+}
