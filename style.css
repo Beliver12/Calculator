@@ -1,15 +1,55 @@
-#container{
-  border: 1px solid black;
-   height: 294px;
-   width: 254px;
+.container{
+   height: 428px;
+   width: 370px;
+   border: 7px solid rgb(83, 62, 7);
+   margin-top: 180px;
+   font-family: 'Courier New', Courier, monospace;
+   font-style: initial;
+   font-weight: bolder;
+ }
+ .operator{
+  background-color: rgb(111, 111, 233);
+ }
+ .keyboard{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: black;
+  
   
  }
- #display{
-   border-bottom: 1px solid black;
-   height: 50px 
+ .equals-key, .delete, #dot{
+  background-color: yellowgreen;
  }
-button{
-height: 60px;
-width: 60px;
-
+ .display{
+   border-bottom: 1px solid black;
+   height: 70px;
+   border: 5px solid black;
+   background-color: rgb(140, 229, 218);
+   font-size: 6vmin;
+   display: flex;
+   justify-content: flex-end;
+   flex-wrap: wrap;
+   
+   
+ }
+.number{
+  background-color: rgb(202, 122, 51);
 }
+
+button{
+border-radius: 12px;
+flex: 120px;
+height: 58px;
+border: 3px solid rgb(48, 36, 5);
+font-size: large;
+font-family: 'Courier New', Courier, monospace;
+   font-style: initial;
+   font-weight: bolder;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  background-color: peachpuff;
+}
+
