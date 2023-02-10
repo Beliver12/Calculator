@@ -1,6 +1,6 @@
 const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
-const showResult = document.querySelector('.result');
+const dotKey = document.querySelector('.point');
 const currentValue = document.querySelector('.second-operand');
 const previousValue = document.querySelector('.first-operand');
 const equalsKey = document.querySelector('.equals-key');
@@ -32,6 +32,10 @@ function divide(a, b) {
   return a / b;
 };
 
+function modulo(a, b){
+  return a % b;
+}
+
 // Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
 function operate(num1, num2, operator) {
   switch (operator) {
@@ -43,6 +47,8 @@ function operate(num1, num2, operator) {
       return multiply(num1, num2);
     case "/":
       return divide(num1, num2);
+      case "%":
+        return modulo(num1, num2);
   }
 };
 
@@ -50,6 +56,7 @@ function operate(num1, num2, operator) {
 
 let storedNumber = '';
 let storedOperator = '';
+let storedDot = '';
 let firstNumber = '';
 let result = '';
 
@@ -69,20 +76,23 @@ operatorButtons.forEach((operator =>{
     firstNumber = storedNumber;
     //store operator that was clicked
     storedOperator = operator.textContent;
-    previousValue.textContent = storedNumber + storedOperator;
+    currentValue.textContent = storedNumber + storedOperator;
     storedNumber = '';
     console.log('first' + firstNumber + 'stored' + storedNumber);
     console.log(storedOperator);
   })
 }));
 
+
+
 //You should already have the code that can populate the display, so once operate() has been called, update the display with the ‘solution’ to the operation.
 
 equalsKey.addEventListener('click', function () {
   // when clicked equal key, call operate() function
   result = operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim())
+  currentValue.textContent = '';
   currentValue.textContent = result;
- previousValue.textContent = firstNumber+ ' ' +storedOperator+ ' ' +storedNumber;
+
  storedNumber = result;
  
  console.log('FirstNumber'+firstNumber+'Stored'+storedNumber)
