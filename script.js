@@ -71,15 +71,22 @@ numberButtons.forEach((number)=>{
 //Make the calculator work! You’ll need to store the first number that is input into the calculator when a user presses an operator, and also save which operation has been chosen and then operate() on them when the user presses the “=” key.
 operatorButtons.forEach((operator =>{
   operator.addEventListener('click', function (){
-
+    if(firstNumber && storedNumber){
+    result =  operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim())
+    currentValue.textContent = result;
+    storedOperator = operator.textContent;
+    storedNumber = '';
+    firstNumber = result;
+    }else{
     //first number stored
     firstNumber = storedNumber;
     //store operator that was clicked
     storedOperator = operator.textContent;
-    currentValue.textContent = storedNumber + storedOperator;
+    currentValue.textContent = storedNumber;
     storedNumber = '';
     console.log('first' + firstNumber + 'stored' + storedNumber);
     console.log(storedOperator);
+    }
   })
 }));
 
@@ -88,14 +95,20 @@ operatorButtons.forEach((operator =>{
 //You should already have the code that can populate the display, so once operate() has been called, update the display with the ‘solution’ to the operation.
 
 equalsKey.addEventListener('click', function () {
+  if(!firstNumber && !storedNumber){
+    result = 0;
+    currentValue.textContent = result;
+  }else{
   // when clicked equal key, call operate() function
   result = operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim())
   currentValue.textContent = '';
   currentValue.textContent = result;
 
  storedNumber = result;
+ firstNumber = '';
  
  console.log('FirstNumber'+firstNumber+'Stored'+storedNumber)
+}
 })
 
 
