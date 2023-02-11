@@ -4,7 +4,7 @@ const dotKey = document.querySelector('.point');
 const currentValue = document.querySelector('.second-operand');
 const previousValue = document.querySelector('.first-operand');
 const equalsKey = document.querySelector('.equals-key');
-
+const deleteButton = document.querySelector('.delete');
 
 
 currentValue.textContent = ' ';
@@ -100,7 +100,7 @@ equalsKey.addEventListener('click', function () {
     currentValue.textContent = result;
   }else{
   // when clicked equal key, call operate() function
-  result = operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim())
+  result = Math.round(operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim()))
   currentValue.textContent = '';
   currentValue.textContent = result;
 
@@ -112,7 +112,12 @@ equalsKey.addEventListener('click', function () {
 })
 
 
-
+deleteButton.addEventListener('click', function () {
+  firstNumber = '';
+  storedNumber = '';
+  storedOperator = '';
+  currentValue.textContent = 0;
+})
 
 
 
