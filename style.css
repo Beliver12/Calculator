@@ -1,11 +1,13 @@
 .container{
-   height: 428px;
+   height: 431px;
    width: 370px;
    border: 7px solid rgb(83, 62, 7);
    margin-top: 180px;
    font-family: 'Courier New', Courier, monospace;
    font-style: initial;
    font-weight: bolder;
+   background-color: black;
+  padding: 2.5px 2.5px;
  }
  .operator{
   background-color: rgb(111, 111, 233);
@@ -42,7 +44,7 @@
 }
 
 button{
-border-radius: 12px;
+border-radius: 15px;
 flex: 120px;
 height: 58px;
 max-width: 370px;
@@ -51,8 +53,18 @@ font-size: large;
 font-family: 'Courier New', Courier, monospace;
    font-style: initial;
    font-weight: bolder;
+   padding: 15px 25px;
+   cursor:pointer;
+   outline: none;
+   border-color:  black;
+   box-shadow: 0 4px red;
+   background-color: #04AA6D;
 }
-
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 body{
   display: flex;
   justify-content: center;
