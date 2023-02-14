@@ -15,8 +15,13 @@
   flex-wrap: wrap;
   background-color: black;
   
-  
  }
+.first-operand{
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 350px;
+}
+
  .equals-key, .delete, #dot{
   background-color: yellowgreen;
  }
@@ -40,6 +45,7 @@ button{
 border-radius: 12px;
 flex: 120px;
 height: 58px;
+max-width: 370px;
 border: 3px solid rgb(48, 36, 5);
 font-size: large;
 font-family: 'Courier New', Courier, monospace;
