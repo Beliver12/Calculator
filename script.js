@@ -70,14 +70,14 @@ numberButtons.forEach((number)=>{
     if(storedNumber.length === 9){//if my stored number goes over 9 digits,
       number.value = '';  //disable number value so we dont type too large numbers.
 
-    }else if(storedNumber > 0){  //if I start typing the number for a next calculation,
+    }else if((storedNumber.length === 0) && number.value === '0'){// If I type 0 and then another number, 
+                 //0 should not be at the beginning of that number
+         currentValue.textContent = 0;
+    }else if(storedNumber === result){  //if I start typing the number for a next calculation,
       storedNumber = '';      // It should clear everything first.   
     storedNumber += number.value;
      currentValue.textContent = storedNumber;
 
-    }else if(storedNumber.length === 0 && number.value === '0'){// If I type 0 and then another number, 
-      currentValue.textContent = 0;                            //0 should not be at the beginning of that number
-      
     }else{
       storedNumber += number.value;
       currentValue.textContent = storedNumber;
