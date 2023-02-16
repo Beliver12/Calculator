@@ -89,9 +89,12 @@ operatorButtons.forEach((operator =>{
     if(firstNumber && storedNumber){
     result =  operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim())
     storedOperator = operator.textContent;
-    currentValue.textContent = result+''+storedOperator;
+    currentValue.textContent = Number(result.toFixed(2))+''+storedOperator;
     storedNumber = '';
     firstNumber = result;
+    }else if(!storedNumber ){
+    alert("Cant do that!");
+    
     }else{
     //first number stored
     firstNumber = storedNumber;
@@ -113,9 +116,8 @@ operatorButtons.forEach((operator =>{
 
 equalsKey.addEventListener('click', function () {
   //Pressing = before entering all of the numbers or an operator could cause problems!
-  if(!firstNumber && !storedNumber){
-    result = 0;
-    currentValue.textContent = result;
+  if(!firstNumber || !storedNumber){
+    alert('Cant do that!')
   }else{
   // when clicked equal key, call operate() function
   result = operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim())
@@ -139,8 +141,11 @@ equalsKey.addEventListener('click', function () {
 
 //Add a “backspace” button, so the user can undo if they click the wrong number.
 backSpaceButton.addEventListener('click', function () {
-  
- storedNumber = storedNumber.replace(/.$/, '');
+  result = result.toString();
+  result = result.substring(0, result.length-1);
+  currentValue.textContent = result;
+  storedNumber = storedNumber.toString();
+ storedNumber = storedNumber.substring(0, storedNumber.length-1);
  currentValue.textContent = storedNumber;
 })
 
