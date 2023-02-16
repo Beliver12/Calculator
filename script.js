@@ -79,9 +79,6 @@ numberButtons.forEach((number)=>{
     storedNumber += number.value;
      currentValue.textContent = storedNumber;
      //result = '';
-    }else if(!firstNumber){
-      firstNumber += number.value;
-      currentValue.textContent = firstNumber;
     }else{
       storedNumber += number.value;
       currentValue.textContent = storedNumber;
@@ -211,8 +208,13 @@ dotKey.addEventListener('click', ()=>{
     storedNumber += '';
   }else{
 storedNumber += '.';
+currentValue.textContent = storedNumber;
   }
 })
+
+
+
+
 
 
 
