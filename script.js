@@ -69,9 +69,13 @@ numberButtons.forEach((number)=>{
   number.addEventListener('click', function (){
     if(storedNumber.length === 9){
       number.value = '';
-    }else{
+    }else if(storedNumber > 0){
+      storedNumber = '';
     storedNumber += number.value;
      currentValue.textContent = storedNumber;
+    }else{
+      storedNumber += number.value;
+      currentValue.textContent = storedNumber;
     }
   })
 });
