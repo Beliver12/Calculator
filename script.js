@@ -73,6 +73,8 @@ numberButtons.forEach((number)=>{
       storedNumber = '';
     storedNumber += number.value;
      currentValue.textContent = storedNumber;
+    }else if(storedNumber.length === 0 && number.value === '0'){
+      currentValue.textContent = 0;
     }else{
       storedNumber += number.value;
       currentValue.textContent = storedNumber;
