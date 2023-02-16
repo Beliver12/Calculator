@@ -79,6 +79,9 @@ numberButtons.forEach((number)=>{
     storedNumber += number.value;
      currentValue.textContent = storedNumber;
      //result = '';
+    }else if(storedOperator && secondOperator){
+      firstNumber += number.value;
+      currentValue.textContent = firstNumber;
     }else{
       storedNumber += number.value;
       currentValue.textContent = storedNumber;
@@ -174,6 +177,7 @@ equalsKey.addEventListener('click', function () {
   currentValue.textContent = Number(result.toFixed(2));
  storedNumber = result;
  firstNumber = '';
+ secondOperator = '';
  console.log('FirstNumber'+firstNumber+'Stored'+storedNumber)
 }
 })
