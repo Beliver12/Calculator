@@ -70,14 +70,18 @@ numberButtons.forEach((number)=>{
     if(storedNumber.length === 9){//if my stored number goes over 9 digits,
       number.value = '';  //disable number value so we dont type too large numbers.
 
-    }else if((storedNumber.length === 0 && storedNumber === result) && number.value === '0'){// If I type 0 and then another number, 
-                    //0 should not be at the beginning of that number
+    }else if((storedNumber.length === 0 || storedNumber.length === 1) && number.value === '0'){// If I type 0 and then another number, 
+       //0 should not be at the beginning of that number
          currentValue.textContent = storedZero;
-    }else if(storedNumber === result){  //if I start typing the number for a next calculation,
+         
+    }else if(storedNumber === result || storedNumber === storedZero){  //if I start typing the number for a next calculation,
       storedNumber = '';      // It should clear everything first.   
     storedNumber += number.value;
      currentValue.textContent = storedNumber;
-
+     //result = '';
+    }else if(!firstNumber){
+      firstNumber += number.value;
+      currentValue.textContent = firstNumber;
     }else{
       storedNumber += number.value;
       currentValue.textContent = storedNumber;
@@ -101,18 +105,28 @@ operatorButtons.forEach((operator =>{
     currentValue.textContent = Number(result.toFixed(2))+''+storedOperator;
     storedNumber = '';
     firstNumber = result;
-    }else if(storedNumber && storedZero){
+    }else if(storedNumber && storedZero && secondOperator){
       result = operate(parseFloat(storedZero), parseFloat(storedNumber), storedOperator.trim());
       storedOperator = operator.textContent;
-      currentValue.textContent = Number(result.toFixed(2))+''+storedOperator;
+      currentValue.textContent = Number(result)+''+storedOperator;
     storedNumber = '';
     firstNumber = result;
-    }else if(storedOperator){//overwrite an operator with a later operator
-       storedNumber = firstNumber;
+    }else if(firstNumber && storedOperator){
       secondOperator = operator.textContent;
       storedOperator = secondOperator;
-      currentValue.textContent = storedZero+ ''+storedOperator;
-      storedNumber = '';
+      currentValue.textContent = firstNumber + storedOperator;
+    }else if(storedZero && operator && !storedNumber){
+      secondOperator = operator.textContent;
+      storedOperator = secondOperator;
+      currentValue.textContent = storedZero + storedOperator;
+    }else if(storedOperator){//overwrite an operator with a later operator
+      secondOperator = operator.textContent;
+      storedOperator = secondOperator;
+      currentValue.textContent = storedNumber + storedOperator;
+     
+    }else if(storedZero && !firstNumber&& !secondOperator && !storedNumber){
+      storedOperator = operator.textContent;
+      currentValue.textContent = storedZero+''+storedOperator;
     }else{
     //first number stored
     firstNumber = storedNumber;
@@ -136,11 +150,25 @@ equalsKey.addEventListener('click', function () {
   //Pressing = before entering all of the numbers or an operator could cause problems!
   if(!firstNumber && !storedNumber && !storedOperator && !storedZero){
     alert('Cant do that!')
+  }else if(!firstNumber && !storedNumber){
+  currentValue.textContent = storedZero;
   }else if(!firstNumber){
     result = operate(parseFloat(storedZero), parseFloat(storedNumber), storedOperator.trim());
     currentValue.textContent = Number(result.toFixed(2));
-    storedNumber = result;
+    result = '';
+    storedNumber = '';
     firstNumber = '';
+    storedOperator = '';
+    alert("If there is a 50-50 chance that something can go wrong, then 9 times out of 10 it will.");
+    
+  }else if(!storedNumber){
+    result = operate(parseFloat(storedZero), parseFloat(firstNumber), storedOperator.trim());
+    currentValue.textContent = Number(result.toFixed(2));
+    result = '';
+    storedNumber = '';
+    firstNumber = '';
+    storedOperator = '';
+    alert("If there is a 50-50 chance that something can go wrong, then 9 times out of 10 it will.");
   }else{
   // when clicked equal key, call operate() function
   result = operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim());
