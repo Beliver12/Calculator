@@ -54,13 +54,13 @@ function operate(num1, num2, operator) {
 };
 
 
-
+let secondOperator = '';
 let storedNumber = '';
 let storedOperator = '';
 let storedDot = '';
 let firstNumber = '';
 let result = '';
-
+let storedZero = '0';
 currentValue.textContent = 0;
 ////Create the functions that populate the display when you click the number buttons. 
 //You should be storing the ‘display value’ in a variable somewhere for use in the next 
@@ -70,9 +70,9 @@ numberButtons.forEach((number)=>{
     if(storedNumber.length === 9){//if my stored number goes over 9 digits,
       number.value = '';  //disable number value so we dont type too large numbers.
 
-    }else if((storedNumber.length === 0) && number.value === '0'){// If I type 0 and then another number, 
-                 //0 should not be at the beginning of that number
-         currentValue.textContent = 0;
+    }else if((storedNumber.length === 0 && storedNumber === result) && number.value === '0'){// If I type 0 and then another number, 
+                    //0 should not be at the beginning of that number
+         currentValue.textContent = storedZero;
     }else if(storedNumber === result){  //if I start typing the number for a next calculation,
       storedNumber = '';      // It should clear everything first.   
     storedNumber += number.value;
@@ -95,15 +95,24 @@ operatorButtons.forEach((operator =>{
     //second, display the result of that calculation (19), and 
     //finally, use that result (19) as the first number in your new calculation, 
     //along with the next operator (-).
-    if(firstNumber && storedNumber){
-    result =  operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim())
+    if(firstNumber && storedNumber && storedZero){
+    result =  operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim());
     storedOperator = operator.textContent;
     currentValue.textContent = Number(result.toFixed(2))+''+storedOperator;
     storedNumber = '';
     firstNumber = result;
-    }else if(!storedNumber ){
-    alert("Cant do that!");
-    
+    }else if(storedNumber && storedZero){
+      result = operate(parseFloat(storedZero), parseFloat(storedNumber), storedOperator.trim());
+      storedOperator = operator.textContent;
+      currentValue.textContent = Number(result.toFixed(2))+''+storedOperator;
+    storedNumber = '';
+    firstNumber = result;
+    }else if(storedOperator){//overwrite an operator with a later operator
+       storedNumber = firstNumber;
+      secondOperator = operator.textContent;
+      storedOperator = secondOperator;
+      currentValue.textContent = storedZero+ ''+storedOperator;
+      storedNumber = '';
     }else{
     //first number stored
     firstNumber = storedNumber;
@@ -125,11 +134,16 @@ operatorButtons.forEach((operator =>{
 
 equalsKey.addEventListener('click', function () {
   //Pressing = before entering all of the numbers or an operator could cause problems!
-  if(!firstNumber || !storedNumber){
+  if(!firstNumber && !storedNumber && !storedOperator && !storedZero){
     alert('Cant do that!')
+  }else if(!firstNumber){
+    result = operate(parseFloat(storedZero), parseFloat(storedNumber), storedOperator.trim());
+    currentValue.textContent = Number(result.toFixed(2));
+    storedNumber = result;
+    firstNumber = '';
   }else{
   // when clicked equal key, call operate() function
-  result = operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim())
+  result = operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim());
   currentValue.textContent = '';
  //You should round answers with long decimals so that they don’t overflow the screen.
   currentValue.textContent = Number(result.toFixed(2));
@@ -145,6 +159,8 @@ equalsKey.addEventListener('click', function () {
     firstNumber = '';
     storedNumber = '';
     storedOperator = '';
+    secondOperator = '';
+    result = '';
     currentValue.textContent = 0;
   })
 
