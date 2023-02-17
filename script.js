@@ -73,7 +73,7 @@ numberButtons.forEach((number)=>{
     }else if((storedNumber.length === 0 ) && number.value === '0'){// If I type 0 and then another number, 
        //0 should not be at the beginning of that number
        storedNumber += number.value;
-         currentValue.textContent = storedNumber;
+         currentValue.textContent = storedNumber
          
     }else if(storedNumber === result ||storedNumber === storedZero){  //if I start typing the number for a next calculation,
       storedNumber = '';      // It should clear everything first.   
