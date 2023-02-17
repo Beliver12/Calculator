@@ -157,23 +157,11 @@ equalsKey.addEventListener('click', function () {
   if(!firstNumber && !storedNumber && !storedOperator && !storedZero){
     alert('Cant do that!')
   }else if(!firstNumber && !storedNumber){
-  currentValue.textContent = storedZero;
+    alert("Nothing to Calculate!"); 
   }else if(!firstNumber){
-    result = operate(parseFloat(result), parseFloat(storedNumber), storedOperator.trim());
-    currentValue.textContent = Number(result.toFixed(2));
-    result = '';
-    firstNumber = '';
-    storedOperator = '';
-    secondOperator = '';
-    
-    
+    alert("Missing one number cant click equal"); 
   }else if(!storedNumber){
-    result = operate(parseFloat(result), parseFloat(firstNumber), storedOperator.trim());
-    currentValue.textContent = Number(result.toFixed(2));
-    result = '';
-    firstNumber = '';
-    storedOperator = '';
-    secondOperator = '';
+    alert("Missing one number cant click equal"); 
     
   }else{
   // when clicked equal key, call operate() function
@@ -202,11 +190,21 @@ equalsKey.addEventListener('click', function () {
 //Add a “backspace” button, so the user can undo if they click the wrong number.
 backSpaceButton.addEventListener('click', function () {
   result = result.toString();
+  if(result.length === 1 || result === ''){
+  currentValue.textContent = 0;
+  }else{
   result = result.substring(0, result.length-1);
-  currentValue.textContent = result;
+    currentValue.textContent = result;
+    result = '';
+  }
   storedNumber = storedNumber.toString();
+ if(storedNumber.length === 1 || storedNumber === ''){
+  currentValue.textContent = 0;
+  storedNumber = '';
+  }else{
  storedNumber = storedNumber.substring(0, storedNumber.length-1);
- currentValue.textContent = storedNumber;
+    currentValue.textContent = storedNumber;
+  }
 })
 
 //Add a . button and let users input decimals!
@@ -214,6 +212,7 @@ dotKey.addEventListener('click', ()=>{
 //Make sure you don’t let them type more than one though: 
 //12.3.56.5. It is hard to do math on these numbers.  
 //(disable the decimal button if there’s already one in the display)
+storedNumber = storedNumber.toString();
   if(storedNumber.includes ('.',0)){
     storedNumber += '';
   }else{
