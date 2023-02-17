@@ -29,7 +29,12 @@ function multiply(a, b) {
 
 // Divide a,b ... 
 function divide(a, b) {
+  if(a === 0 || b === 0){
+    alert("Press CE button if you get crash. This calculation may cause crash!");
+    return a / b;
+  }else{
   return a / b;
+  }
 };
 
 function modulo(a, b){
@@ -216,6 +221,13 @@ storedNumber += '.';
 currentValue.textContent = storedNumber;
   }
 })
+
+
+
+
+
+
+
 
 
 
