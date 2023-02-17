@@ -119,7 +119,7 @@ operatorButtons.forEach((operator =>{
     }else if(storedZero && operator && !storedNumber){
       secondOperator = operator.textContent;
       storedOperator = secondOperator;
-      currentValue.textContent = storedZero + storedOperator;
+      currentValue.textContent = storedNumber + storedOperator;
     }else if(storedOperator){//overwrite an operator with a later operator
       secondOperator = operator.textContent;
       storedOperator = secondOperator;
@@ -154,22 +154,22 @@ equalsKey.addEventListener('click', function () {
   }else if(!firstNumber && !storedNumber){
   currentValue.textContent = storedZero;
   }else if(!firstNumber){
-    result = operate(parseFloat(storedZero), parseFloat(storedNumber), storedOperator.trim());
+    result = operate(parseFloat(result), parseFloat(storedNumber), storedOperator.trim());
     currentValue.textContent = Number(result.toFixed(2));
     result = '';
-    storedNumber = '';
     firstNumber = '';
     storedOperator = '';
-    alert("If there is a 50-50 chance that something can go wrong, then 9 times out of 10 it will.");
+    secondOperator = '';
+    
     
   }else if(!storedNumber){
-    result = operate(parseFloat(storedZero), parseFloat(firstNumber), storedOperator.trim());
+    result = operate(parseFloat(result), parseFloat(firstNumber), storedOperator.trim());
     currentValue.textContent = Number(result.toFixed(2));
     result = '';
-    storedNumber = '';
     firstNumber = '';
     storedOperator = '';
-    alert("If there is a 50-50 chance that something can go wrong, then 9 times out of 10 it will.");
+    secondOperator = '';
+    
   }else{
   // when clicked equal key, call operate() function
   result = operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim());
