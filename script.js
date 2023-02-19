@@ -158,12 +158,20 @@ equalsKey.addEventListener('click', function () {
     alert('Cant do that!')
   }else if(!firstNumber && !storedNumber){
     alert("Nothing to Calculate!"); 
-  }else if(!firstNumber){
+  }else if(!firstNumber && !result){
     alert("Missing one number cant click equal"); 
-  }else if(!storedNumber){
+  }else if(!storedNumber && !result){
     alert("Missing one number cant click equal"); 
     
-  }else{
+  }else if(result && storedNumber){
+ result = operate(parseFloat(result), parseFloat(storedNumber), storedOperator.trim());
+ currentValue.textContent = '';
+ //You should round answers with long decimals so that they don’t overflow the screen.
+  currentValue.textContent = Number(result.toFixed(2));
+ storedNumber = result;
+ firstNumber = '';
+ secondOperator = '';
+}else{
   // when clicked equal key, call operate() function
   result = operate(parseFloat(firstNumber), parseFloat(storedNumber), storedOperator.trim());
   currentValue.textContent = '';
